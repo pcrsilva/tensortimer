@@ -283,16 +283,16 @@ class _PresetSelectorSheetState extends ConsumerState<PresetSelectorSheet> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
-                  Row(
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 4,
                     children: [
                       _buildMiniBadge(
                           Icons.timer_outlined, totalDurationStr, isDark),
-                      const SizedBox(width: 8),
                       _buildMiniBadge(
                           Icons.fitness_center_rounded,
                           '${cfg.totalExercises} ${cfg.totalExercises == 1 ? 'exercício' : 'exercícios'}',
                           isDark),
-                      const SizedBox(width: 8),
                       _buildMiniBadge(
                           Icons.layers_outlined, '${cfg.totalSets} séries', isDark),
                     ],

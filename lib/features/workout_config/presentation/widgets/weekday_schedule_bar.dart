@@ -64,25 +64,32 @@ class _WeekdayScheduleBarState extends State<WeekdayScheduleBar> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.calendar_month_rounded,
-                          size: 16, color: AppColors.brandPrimary),
-                      const SizedBox(width: 6),
-                      Text(
-                        'CRONOGRAMA SEMANAL DE TREINO',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 0.5,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.lightTextSecondary,
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Icon(Icons.calendar_month_rounded,
+                            size: 15, color: AppColors.brandPrimary),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            'CRONOGRAMA SEMANAL',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 0.5,
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.lightTextSecondary,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  if (isTodaySelected)
+                  if (isTodaySelected) ...[
+                    const SizedBox(width: 6),
                     Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 6, vertical: 2),
@@ -102,6 +109,7 @@ class _WeekdayScheduleBarState extends State<WeekdayScheduleBar> {
                         ),
                       ),
                     ),
+                  ],
                 ],
               ),
               const SizedBox(height: 10),

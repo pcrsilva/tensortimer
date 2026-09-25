@@ -213,13 +213,17 @@ class _ExerciseCardState extends State<ExerciseCard> {
                         ),
                       ),
                       const SizedBox(width: 6),
-                      Text(
-                        'Total: ${DurationFormatter.format(Duration(seconds: ex.totalDurationSeconds))}',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: isDark
-                              ? AppColors.darkTextSecondary
-                              : AppColors.lightTextSecondary,
+                      Flexible(
+                        child: Text(
+                          'Total: ${DurationFormatter.format(Duration(seconds: ex.totalDurationSeconds))}',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: isDark
+                                ? AppColors.darkTextSecondary
+                                : AppColors.lightTextSecondary,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -396,26 +400,32 @@ class _ExerciseCardState extends State<ExerciseCard> {
               color: isSelected ? selectedColor : Colors.grey,
             ),
             const SizedBox(width: 6),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                    color: isSelected ? selectedColor : Colors.grey,
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.w800,
+                      color: isSelected ? selectedColor : Colors.grey,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 9.5,
-                    color: isSelected ? selectedColor.withValues(alpha: 0.8) : Colors.grey,
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: 9,
+                      color: isSelected ? selectedColor.withValues(alpha: 0.8) : Colors.grey,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -625,29 +635,33 @@ class _ExerciseCardState extends State<ExerciseCard> {
               ),
             ),
             const SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildSmallStepBtn(
-                  icon: Icons.remove,
-                  onTap: () => onChanged((seconds - 1).clamp(0, 30)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Text(
-                    '${seconds}s',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w900,
-                      color: color,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildSmallStepBtn(
+                    icon: Icons.remove,
+                    onTap: () => onChanged((seconds - 1).clamp(0, 30)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    child: Text(
+                      '${seconds}s',
+                      style: TextStyle(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w900,
+                        color: color,
+                      ),
                     ),
                   ),
-                ),
-                _buildSmallStepBtn(
-                  icon: Icons.add,
-                  onTap: () => onChanged((seconds + 1).clamp(0, 30)),
-                ),
-              ],
+                  _buildSmallStepBtn(
+                    icon: Icons.add,
+                    onTap: () => onChanged((seconds + 1).clamp(0, 30)),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -839,6 +853,8 @@ class _ExerciseCardState extends State<ExerciseCard> {
                   fontWeight: FontWeight.w800,
                   color: isDark ? Colors.white : AppColors.lightTextPrimary,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
               Text(
                 subtitle,
@@ -848,6 +864,8 @@ class _ExerciseCardState extends State<ExerciseCard> {
                       ? AppColors.darkTextSecondary
                       : AppColors.lightTextSecondary,
                 ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

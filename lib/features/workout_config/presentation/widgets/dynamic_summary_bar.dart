@@ -13,7 +13,7 @@ class DynamicSummaryBar extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkCardElevated : Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -75,59 +75,76 @@ class DynamicSummaryBar extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Expanded(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 14, color: iconColor),
-              const SizedBox(width: 4),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 2),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon, size: 12, color: iconColor),
+                const SizedBox(width: 3),
+                Flexible(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: isDark
+                          ? AppColors.darkTextSecondary
+                          : AppColors.lightTextSecondary,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              ],
+            ),
+            const SizedBox(height: 3),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                value,
+                style: TextStyle(
+                  fontSize: highlight ? 18 : 16,
+                  fontWeight: FontWeight.w900,
+                  color: highlight
+                      ? AppColors.brandPrimary
+                      : (isDark ? Colors.white : AppColors.lightTextPrimary),
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ),
+            if (subtitle != null) ...[
+              const SizedBox(height: 2),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 9.5,
+                    color: isDark
+                        ? AppColors.darkTextSecondary
+                        : AppColors.lightTextSecondary,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: highlight ? 20 : 18,
-              fontWeight: FontWeight.w900,
-              color: highlight
-                  ? AppColors.brandPrimary
-                  : (isDark ? Colors.white : AppColors.lightTextPrimary),
-              letterSpacing: -0.5,
-            ),
-          ),
-          if (subtitle != null) ...[
-            const SizedBox(height: 2),
-            Text(
-              subtitle,
-              style: TextStyle(
-                fontSize: 10,
-                color: isDark ? AppColors.darkTextSecondary : AppColors.lightTextSecondary,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
           ],
-        ],
+        ),
       ),
     );
   }
 
   Widget _buildDivider(bool isDark) {
     return Container(
-      height: 32,
+      height: 28,
       width: 1,
+      margin: const EdgeInsets.symmetric(horizontal: 2),
       color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
     );
   }

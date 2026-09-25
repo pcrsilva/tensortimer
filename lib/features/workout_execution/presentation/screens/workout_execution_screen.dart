@@ -236,32 +236,38 @@ class _WorkoutExecutionScreenState
           icon: const Icon(Icons.close_rounded, color: Colors.white, size: 28),
           tooltip: 'Encerrar Treino',
         ),
-        Column(
-          children: [
-            Text(
-              widget.config.name,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
+        Expanded(
+          child: Column(
+            children: [
+              Text(
+                widget.config.name,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-            Text(
-              state.status.isPaused
-                  ? 'PAUSADO'
-                  : (state.status.isCompleted ? 'CONCLUÍDO' : 'EM ANDAMENTO'),
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.5,
-                color: state.status.isPaused
-                    ? AppColors.prepare
-                    : (state.status.isCompleted
-                        ? AppColors.completed
-                        : AppColors.brandPrimary),
+              Text(
+                state.status.isPaused
+                    ? 'PAUSADO'
+                    : (state.status.isCompleted ? 'CONCLUÍDO' : 'EM ANDAMENTO'),
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.5,
+                  color: state.status.isPaused
+                      ? AppColors.prepare
+                      : (state.status.isCompleted
+                          ? AppColors.completed
+                          : AppColors.brandPrimary),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         IconButton(
           onPressed: () => _engine.reset(),
