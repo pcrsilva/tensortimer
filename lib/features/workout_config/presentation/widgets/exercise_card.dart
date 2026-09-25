@@ -182,15 +182,18 @@ class _ExerciseCardState extends State<ExerciseCard> {
                   Text(
                     ex.name,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w800,
                       color: isDark ? Colors.white : AppColors.lightTextPrimary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 2),
-                  Row(
+                  const SizedBox(height: 3),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 3,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -204,7 +207,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
                         child: Text(
                           ex.prescriptionSummary,
                           style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 10.5,
                             fontWeight: FontWeight.w700,
                             color: ex.workMode.isCadence
                                 ? AppColors.work
@@ -212,18 +215,13 @@ class _ExerciseCardState extends State<ExerciseCard> {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      Flexible(
-                        child: Text(
-                          'Total: ${DurationFormatter.format(Duration(seconds: ex.totalDurationSeconds))}',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark
-                                ? AppColors.darkTextSecondary
-                                : AppColors.lightTextSecondary,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      Text(
+                        'Total: ${DurationFormatter.format(Duration(seconds: ex.totalDurationSeconds))}',
+                        style: TextStyle(
+                          fontSize: 10.5,
+                          color: isDark
+                              ? AppColors.darkTextSecondary
+                              : AppColors.lightTextSecondary,
                         ),
                       ),
                     ],
@@ -232,29 +230,42 @@ class _ExerciseCardState extends State<ExerciseCard> {
               ),
             ),
 
-            // Ações rápidas
-            IconButton(
-              icon: const Icon(Icons.copy_rounded, size: 18),
-              tooltip: 'Duplicar Exercício',
-              color: isDark
-                  ? AppColors.darkTextSecondary
-                  : AppColors.lightTextSecondary,
-              onPressed: widget.onDuplicate,
-            ),
-            if (widget.totalExercises > 1)
-              IconButton(
-                icon: const Icon(Icons.delete_outline_rounded,
-                    size: 20, color: AppColors.rest),
-                tooltip: 'Remover Exercício',
-                onPressed: widget.onDelete,
-              ),
-            Icon(
-              _isExpanded
-                  ? Icons.keyboard_arrow_up_rounded
-                  : Icons.keyboard_arrow_down_rounded,
-              color: isDark
-                  ? AppColors.darkTextSecondary
-                  : AppColors.lightTextSecondary,
+            // Ações rápidas compactas
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.copy_rounded, size: 16),
+                  tooltip: 'Duplicar Exercício',
+                  constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+                  padding: const EdgeInsets.all(4),
+                  visualDensity: VisualDensity.compact,
+                  color: isDark
+                      ? AppColors.darkTextSecondary
+                      : AppColors.lightTextSecondary,
+                  onPressed: widget.onDuplicate,
+                ),
+                if (widget.totalExercises > 1)
+                  IconButton(
+                    icon: const Icon(Icons.delete_outline_rounded,
+                        size: 18, color: AppColors.rest),
+                    tooltip: 'Remover Exercício',
+                    constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+                    padding: const EdgeInsets.all(4),
+                    visualDensity: VisualDensity.compact,
+                    onPressed: widget.onDelete,
+                  ),
+                const SizedBox(width: 2),
+                Icon(
+                  _isExpanded
+                      ? Icons.keyboard_arrow_up_rounded
+                      : Icons.keyboard_arrow_down_rounded,
+                  size: 20,
+                  color: isDark
+                      ? AppColors.darkTextSecondary
+                      : AppColors.lightTextSecondary,
+                ),
+              ],
             ),
           ],
         ),

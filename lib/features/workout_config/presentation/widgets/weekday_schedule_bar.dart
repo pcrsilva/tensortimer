@@ -236,24 +236,24 @@ class _WeekdayScheduleBarState extends State<WeekdayScheduleBar> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
+                              Wrap(
+                                spacing: 6,
+                                runSpacing: 2,
+                                crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
-                                  Flexible(
-                                    child: Text(
-                                      preset.name,
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w800,
-                                        color: isDark
-                                            ? Colors.white
-                                            : AppColors.lightTextPrimary,
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                  Text(
+                                    preset.name,
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w800,
+                                      color: isDark
+                                          ? Colors.white
+                                          : AppColors.lightTextPrimary,
                                     ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  if (isLoaded) ...[
-                                    const SizedBox(width: 6),
+                                  if (isLoaded)
                                     Container(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5, vertical: 1.5),
@@ -271,9 +271,9 @@ class _WeekdayScheduleBarState extends State<WeekdayScheduleBar> {
                                         ),
                                       ),
                                     ),
-                                  ],
                                 ],
                               ),
+                              const SizedBox(height: 2),
                               Text(
                                 '${preset.config.totalExercises} exercícios • ${DurationFormatter.format(preset.config.totalDuration)}',
                                 style: TextStyle(
@@ -282,6 +282,8 @@ class _WeekdayScheduleBarState extends State<WeekdayScheduleBar> {
                                       ? AppColors.darkTextSecondary
                                       : AppColors.lightTextSecondary,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),
