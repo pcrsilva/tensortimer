@@ -157,9 +157,9 @@ class _WorkoutConfigScreenState extends ConsumerState<WorkoutConfigScreen> {
                   ),
                 ),
 
-                // 3. Prepare (Preparação Inicial Geral)
+                // 3. Prepare (Preparação Inicial)
                 ConfigFieldCard(
-                  title: 'Preparação Inicial (Prepare)',
+                  title: 'Preparação Inicial',
                   subtitle: 'Tempo antes de iniciar o 1º exercício',
                   value: config.prepareSeconds,
                   isDurationSeconds: true,
@@ -249,10 +249,10 @@ class _WorkoutConfigScreenState extends ConsumerState<WorkoutConfigScreen> {
                   ),
                 ),
 
-                // 6. Cool down (Volta à Calma Final Geral)
+                // 6. Cool down (Volta à Calma)
                 ConfigFieldCard(
-                  title: 'Volta à Calma Final (Cool down)',
-                  subtitle: 'Alongamento e relaxamento ao término de tudo',
+                  title: 'Volta à Calma',
+                  subtitle: 'Alongamento e relaxamento pós-treino',
                   value: config.coolDownSeconds,
                   isDurationSeconds: true,
                   icon: WorkoutPhase.coolDown.icon,

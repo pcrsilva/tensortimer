@@ -32,6 +32,25 @@ void main() {
     expect(find.text('TensionTimer'), findsOneWidget);
     expect(find.textContaining('CRONOGRAMA SEMANAL'), findsOneWidget);
 
+    // Verifica harmonia dos cards de Preparação Inicial
+    expect(find.text('Preparação Inicial'), findsOneWidget);
+    expect(find.text('Tempo antes de iniciar o 1º exercício'), findsOneWidget);
+
+    // Testa incremento rápido no card de Preparação
+    final plus10Finder = find.text('+10s').first;
+    expect(plus10Finder, findsOneWidget);
+    await tester.tap(plus10Finder);
+    await tester.pumpAndSettle();
+
+    // Rola para baixo para verificar o card de Volta à Calma
+    await tester.scrollUntilVisible(
+      find.text('Volta à Calma'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.text('Volta à Calma'), findsOneWidget);
+    expect(find.text('Alongamento e relaxamento pós-treino'), findsOneWidget);
+
     // Abre modal de Presets
     await tester.tap(find.byIcon(Icons.bookmarks_outlined));
     await tester.pumpAndSettle();
