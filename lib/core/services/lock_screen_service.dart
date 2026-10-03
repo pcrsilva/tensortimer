@@ -16,6 +16,7 @@ class LockScreenService {
 
   final FlutterLocalNotificationsPlugin _plugin;
   bool _isInitialized = false;
+  bool _initAttempted = false;
   int _lastReportedRemainingSeconds = -1;
   String _lastReportedPhaseOrStep = '';
 
@@ -23,7 +24,8 @@ class LockScreenService {
       : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
 
   Future<void> initialize() async {
-    if (_isInitialized) return;
+    if (_isInitialized || _initAttempted) return;
+    _initAttempted = true;
 
     try {
       const androidSettings =
