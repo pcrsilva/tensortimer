@@ -10,6 +10,7 @@ import '../widgets/exercise_card.dart';
 import '../widgets/preset_selector_sheet.dart';
 import '../widgets/settings_dialog.dart';
 import '../widgets/weekday_schedule_bar.dart';
+import 'about_app_screen.dart';
 
 class WorkoutConfigScreen extends ConsumerStatefulWidget {
   const WorkoutConfigScreen({super.key});
@@ -79,6 +80,11 @@ class _WorkoutConfigScreenState extends ConsumerState<WorkoutConfigScreen> {
           onPressed: () => SettingsDialog.show(context),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline_rounded),
+            tooltip: 'Sobre o App & Funcionalidades',
+            onPressed: () => AboutAppScreen.show(context),
+          ),
           IconButton(
             icon: const Icon(Icons.bookmarks_outlined),
             tooltip: 'Rotinas & Presets',
