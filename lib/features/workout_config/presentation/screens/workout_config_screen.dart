@@ -6,7 +6,7 @@ import '../../models/workout_phase.dart';
 import '../../providers/workout_config_provider.dart';
 import '../widgets/config_field_card.dart';
 import '../widgets/dynamic_summary_bar.dart';
-import '../widgets/exercise_card.dart';
+import '../widgets/exercise_carousel.dart';
 import '../widgets/preset_selector_sheet.dart';
 import '../widgets/settings_dialog.dart';
 import '../widgets/weekday_schedule_bar.dart';
@@ -116,6 +116,7 @@ class _WorkoutConfigScreenState extends ConsumerState<WorkoutConfigScreen> {
           // Lista de Configuração do Treino
           Expanded(
             child: ListView(
+              key: const Key('workout_config_listview'),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               children: [
                 // 1. Barra de Cronograma Semanal (Seg, Ter, Qua, Qui, Sex, Sáb, Dom)
@@ -178,57 +179,22 @@ class _WorkoutConfigScreenState extends ConsumerState<WorkoutConfigScreen> {
                   onChanged: notifier.setPrepareSeconds,
                 ),
 
+                const SizedBox(height: 14),
+
+                // 4. Carrossel de Exercícios do Treino (Abas + Paging + Cards)
+                ExerciseCarousel(
+                  exercises: config.exercises,
+                  onExerciseChanged: notifier.updateExercise,
+                  onDuplicateExercise: notifier.duplicateExercise,
+                  onDeleteExercise: notifier.removeExercise,
+                  onAddExercise: notifier.addExercise,
+                ),
+
                 const SizedBox(height: 12),
 
-                // 4. Cabeçalho da Seção de Exercícios
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'EXERCÍCIOS DO TREINO (${config.exercises.length})',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 0.8,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.lightTextSecondary,
-                      ),
-                    ),
-                    TextButton.icon(
-                      onPressed: () => notifier.addExercise(),
-                      icon: const Icon(Icons.add_rounded, size: 18),
-                      label: const Text('Adicionar'),
-                      style: TextButton.styleFrom(
-                        visualDensity: VisualDensity.compact,
-                        foregroundColor: AppColors.brandPrimary,
-                        textStyle: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 6),
-
-                // 5. Lista de Exercícios (Cards Expansíveis)
-                ...List.generate(config.exercises.length, (index) {
-                  final ex = config.exercises[index];
-                  return ExerciseCard(
-                    key: ValueKey(ex.id),
-                    index: index + 1,
-                    totalExercises: config.exercises.length,
-                    exercise: ex,
-                    onChanged: notifier.updateExercise,
-                    onDuplicate: () => notifier.duplicateExercise(ex.id),
-                    onDelete: () => notifier.removeExercise(ex.id),
-                  );
-                }),
-
-                // Botão de Adicionar Exercício Grande
+                // 5. Botão de Adicionar Exercício Grande (Permanece no ListView)
                 Container(
-                  margin: const EdgeInsets.only(top: 4, bottom: 12),
+                  margin: const EdgeInsets.only(bottom: 14),
                   child: OutlinedButton.icon(
                     onPressed: () => notifier.addExercise(),
                     icon: const Icon(Icons.add_circle_outline_rounded,

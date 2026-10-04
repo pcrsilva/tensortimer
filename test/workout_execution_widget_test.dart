@@ -20,6 +20,11 @@ void main() {
   testWidgets(
       'WorkoutConfigScreen displays weekday schedule bar, multi-exercise builder and allows presets/settings',
       (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1000, 2200);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
     await tester.pumpWidget(
       const ProviderScope(
         child: MaterialApp(
@@ -32,9 +37,15 @@ void main() {
     expect(find.text('TensionTimer'), findsOneWidget);
     expect(find.textContaining('CRONOGRAMA SEMANAL'), findsOneWidget);
 
-    // Verifica harmonia dos cards de Preparação Inicial
+    // Verifica presença do carrossel de exercícios
+    expect(find.text('EXERCÍCIOS DO TREINO'), findsOneWidget);
+    expect(find.text('ADICIONAR OUTRO EXERCÍCIO'), findsOneWidget);
+
+    // Verifica harmonia dos cards de Preparação Inicial e Volta à Calma
     expect(find.text('Preparação Inicial'), findsOneWidget);
     expect(find.text('Tempo antes de iniciar o 1º exercício'), findsOneWidget);
+    expect(find.text('Volta à Calma'), findsOneWidget);
+    expect(find.text('Alongamento e relaxamento pós-treino'), findsOneWidget);
 
     // Testa incremento rápido no card de Preparação
     final plus10Finder = find.text('+10s').first;
@@ -42,14 +53,10 @@ void main() {
     await tester.tap(plus10Finder);
     await tester.pumpAndSettle();
 
-    // Rola para baixo para verificar o card de Volta à Calma
-    await tester.scrollUntilVisible(
-      find.text('Volta à Calma'),
-      200,
-      scrollable: find.byType(Scrollable).first,
-    );
-    expect(find.text('Volta à Calma'), findsOneWidget);
-    expect(find.text('Alongamento e relaxamento pós-treino'), findsOneWidget);
+    // Testa navegação de abas no carrossel de exercícios
+    expect(find.text('Próximo'), findsOneWidget);
+    await tester.tap(find.text('Próximo'));
+    await tester.pumpAndSettle();
 
     // Abre modal de Presets
     await tester.tap(find.byIcon(Icons.bookmarks_outlined));

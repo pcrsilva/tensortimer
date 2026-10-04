@@ -13,6 +13,7 @@ class ExerciseCard extends StatefulWidget {
   final ValueChanged<ExerciseConfig> onChanged;
   final VoidCallback onDuplicate;
   final VoidCallback onDelete;
+  final EdgeInsetsGeometry? margin;
 
   const ExerciseCard({
     super.key,
@@ -22,6 +23,7 @@ class ExerciseCard extends StatefulWidget {
     required this.onChanged,
     required this.onDuplicate,
     required this.onDelete,
+    this.margin,
   });
 
   @override
@@ -81,7 +83,7 @@ class _ExerciseCardState extends State<ExerciseCard> {
     final isCadence = ex.workMode.isCadence;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 14),
+      margin: widget.margin ?? const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkCard : Colors.white,
         borderRadius: BorderRadius.circular(18),
