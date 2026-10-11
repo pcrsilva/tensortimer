@@ -34,10 +34,9 @@ O **TensionTimer** continua executando com precisão absoluta mesmo quando a tel
   - Notificação pública de alta prioridade na tela de bloqueio (`NotificationVisibility.public`, `category: stopwatch`).
   - Atualização em tempo real a cada segundo: exibe o exercício atual, série, repetição, fase da cadência (ex: *Descida 2s*) e contagem regressiva total.
   - Permissões de serviço em primeiro plano (`FOREGROUND_SERVICE` e `WAKE_LOCK`).
-- **iOS (Background Audio & Interrupções Sensíveis ao Tempo):**
-  - Modo `UIBackgroundModes: ["audio"]` ativado no `Info.plist`, mantendo o timer ativo em background.
-  - Bipes de contagem regressiva continuam soando normalmente com a tela apagada.
+- **iOS (Interrupções Sensíveis ao Tempo & Live Activities):**
   - Notificações com nível `timeSensitive` e suporte a Atividades ao Vivo (`NSSupportsLiveActivities`).
+  - Bipes de contagem regressiva e feedback tátil durante a execução.
 - **Conclusão Automática:** Notificação de conquista `🏆 Treino Concluído!` ao finalizar a sessão.
 
 ---

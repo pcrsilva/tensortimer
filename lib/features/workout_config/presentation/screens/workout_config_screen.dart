@@ -6,7 +6,7 @@ import '../../models/workout_phase.dart';
 import '../../providers/workout_config_provider.dart';
 import '../widgets/config_field_card.dart';
 import '../widgets/dynamic_summary_bar.dart';
-import '../widgets/exercise_carousel.dart';
+import '../widgets/exercise_list_section.dart';
 import '../widgets/preset_selector_sheet.dart';
 import '../widgets/settings_dialog.dart';
 import '../widgets/weekday_schedule_bar.dart';
@@ -181,12 +181,13 @@ class _WorkoutConfigScreenState extends ConsumerState<WorkoutConfigScreen> {
 
                 const SizedBox(height: 14),
 
-                // 4. Carrossel de Exercícios do Treino (Abas + Paging + Cards)
-                ExerciseCarousel(
+                // 4. Lista de Exercícios do Treino (ListView com Cards e Diálogo de Configuração)
+                ExerciseListSection(
                   exercises: config.exercises,
                   onExerciseChanged: notifier.updateExercise,
                   onDuplicateExercise: notifier.duplicateExercise,
                   onDeleteExercise: notifier.removeExercise,
+                  onReorderExercise: notifier.reorderExercises,
                   onAddExercise: notifier.addExercise,
                 ),
 

@@ -217,7 +217,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
           FeatureItem(
             title: 'Execução em Segundo Plano & Lock Screen',
             description:
-                'Com suporte nativo a áudio em segundo plano (UIBackgroundModes) e notificações no Android e iOS, o cronômetro continua ativo mesmo com o celular bloqueado no bolso.',
+                'Com suporte a notificações e alertas precisos no Android e iOS, o cronômetro mantém você informado mesmo com a tela bloqueada.',
             highlights: [
               'Notificação viva com tempo restante na Lock Screen',
               'Bipes audíveis mesmo com o aparelho bloqueado',

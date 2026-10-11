@@ -53,9 +53,17 @@ void main() {
     await tester.tap(plus10Finder);
     await tester.pumpAndSettle();
 
-    // Testa navegação de abas no carrossel de exercícios
-    expect(find.text('Próximo'), findsOneWidget);
-    await tester.tap(find.text('Próximo'));
+    // Testa abertura da caixa de diálogo ao clicar no exercício para configurar parâmetros
+    expect(find.text('Ajustar'), findsWidgets);
+    await tester.tap(find.text('Ajustar').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Configurar Exercício'), findsOneWidget);
+    expect(find.text('VELOCIDADE DO MOVIMENTO (CADÊNCIA TUT)'), findsOneWidget);
+    expect(find.text('SÉRIES & TEMPOS DE DESCANSO'), findsOneWidget);
+
+    // Salva e fecha a caixa de diálogo
+    await tester.tap(find.text('Salvar'));
     await tester.pumpAndSettle();
 
     // Abre modal de Presets

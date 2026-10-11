@@ -1,7 +1,7 @@
 name: tensortimer
 description: "TensionTimer - Controle de tempo sob tensão (TUT) e treinos intervalados para iOS e Android."
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+3
 
 environment:
   sdk: ^3.0.0

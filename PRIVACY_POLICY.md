@@ -12,7 +12,7 @@ O **TensionTimer** é um aplicativo de utilidade esportiva e cronômetro de trei
 
 ## 2. Permissões do Sistema
 O aplicativo pode solicitar as seguintes permissões estritamente necessárias para seu funcionamento:
-- **Áudio em Segundo Plano (`UIBackgroundModes: audio`):** Utilizado exclusivamente para reproduzir os bipes sonoros de contagem regressiva nos 3 segundos finais de preparação, séries e descansos enquanto a tela estiver bloqueada.
+- **Áudio e Efeitos Sonoros:** Utilizado para reproduzir os bipes sonoros de contagem regressiva nos 3 segundos finais de preparação, séries e descansos.
 - **Notificações Locais:** Utilizadas para exibir o progresso do exercício atual, tempo restante e aviso de conclusão na tela de bloqueio do aparelho.
 - **Manter Tela Ligada (`WAKELOCK`):** Impede o bloqueio indesejado da tela enquanto você acompanha a cadência visual durante a série de musculação.
 
